@@ -12,7 +12,7 @@ class LoginApp(customtkinter.CTk):
 
         # Configure the window
         self.title("Login Screen")
-        self.geometry("400x300")
+        self.geometry("1000x500")
 
         # Create a frame for the login form
         self.frame = customtkinter.CTkFrame(master=self)
