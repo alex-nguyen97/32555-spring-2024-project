@@ -1,0 +1,2 @@
+HEADING = ("Arial", 20)
+SCREEN_SIZE = "1000x500"

@@ -1,55 +1,66 @@
-import customtkinter
-import tkinter.messagebox
-
-# Set the appearance mode and color theme for CustomTkinter
-customtkinter.set_appearance_mode("Dark")  # Modes: "System", "Dark", "Light"
-customtkinter.set_default_color_theme("blue")  # Themes: "blue", "green", "dark-blue"
+import customtkinter as ctk
+from ui.login import LoginScreen
+from ui.registration import RegistrationScreen
+import utils.helpers as helpers
 
 
-class LoginApp(customtkinter.CTk):
+class Main():
     def __init__(self):
-        super().__init__()
+        self.start_program()
 
-        # Configure the window
-        self.title("Login Screen")
-        self.geometry("1000x500")
+    def start_program(self):
+        print('Here are the types of applications: ')
+        print('1. CLIUniApp')
+        print('2. GUIUniApp')
+        while (True):
+            option = int(input(
+                'Please choose the type of application that you want to start (select 1 or 2, 3 is exit): '))
+            if (option == 1):
+                print('You have chosen the CLIUniApp!')
+                return
+            elif (option == 2):
+                print('You have chosen the GUIUniApp!')
+                self.create_container()
 
-        # Create a frame for the login form
-        self.frame = customtkinter.CTkFrame(master=self)
-        self.frame.pack(pady=50, padx=50, fill="both", expand=True)
+            elif (option == 3):
+                print('Program is exiting...')
+                return
+            else:
+                print('You have typed something wrong. Please type again!')
 
-        # Add a label for the login title
-        self.label = customtkinter.CTkLabel(master=self.frame, text="Please Login", font=("Arial", 20))
-        self.label.pack(pady=20)
+    def create_container(self):
+        # creating a container
+        ctk.set_appearance_mode("Dark")
+        # Themes: "blue", "green", "dark-blue"
+        ctk.set_default_color_theme("blue")
+        root = ctk.CTk()
+        root.geometry(helpers.SCREEN_SIZE)
 
-        # Add the username entry field
-        self.username_label = customtkinter.CTkLabel(master=self.frame, text="Username")
-        self.username_label.pack(pady=10)
-        self.username_entry = customtkinter.CTkEntry(master=self.frame, placeholder_text="Enter your username")
-        self.username_entry.pack(pady=10)
+        container = ctk.CTkFrame(master=root)
+        container.pack(side="top", fill="both", expand=True)
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
 
-        # Add the password entry field
-        self.password_label = customtkinter.CTkLabel(master=self.frame, text="Password")
-        self.password_label.pack(pady=10)
-        self.password_entry = customtkinter.CTkEntry(master=self.frame, placeholder_text="Enter your password", show="*")
-        self.password_entry.pack(pady=10)
+        # initializing frames to an empty array
+        self.frames = {}
 
-        # Add a login button
-        self.login_button = customtkinter.CTkButton(master=self.frame, text="Login", command=self.check_login)
-        self.login_button.pack(pady=20)
+        # iterating through a tuple consisting
+        # of the different page layouts
+        for F in (LoginScreen, RegistrationScreen):
+            frame = F(container, self)
+            # initializing frame of that object from
+            # login, register respectively with
+            # for loop
+            self.frames[F] = frame
+            frame.grid(row=0, column=0, sticky="nsew")
 
-    def check_login(self):
-        # Get username and password from entry fields
-        username = self.username_entry.get()
-        password = self.password_entry.get()
+        self.show_frame(LoginScreen)
+        root.mainloop()
 
-        # Check if username and password match predefined values
-        if username == "admin" and password == "password":
-            tkinter.messagebox.showinfo("Login Success", "You have successfully logged in!")
-        else:
-            tkinter.messagebox.showerror("Login Failed", "Invalid username or password")
+    def show_frame(self, cont):
+        frame = self.frames[cont]
+        frame.tkraise()
 
 
 if __name__ == "__main__":
-    app = LoginApp()
-    app.mainloop()
+    app = Main()
