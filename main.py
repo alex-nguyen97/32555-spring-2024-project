@@ -22,7 +22,7 @@ class Main():
                 print('You have chosen the GUIUniApp!')
                 self.create_container()
 
-            elif (option == 3):
+            elif (option == 4):
                 print('Program is exiting...')
                 return
             else:
