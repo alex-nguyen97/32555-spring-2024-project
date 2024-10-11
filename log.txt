@@ -1,0 +1,82 @@
+05/18/2024 03:05:32 PM Login attempt made with email: jon.jones@university.com and password: Hellow1234
+05/18/2024 03:05:38 PM Login attempt made with email: jon.jones@university.com and password: Hellow123
+05/18/2024 03:09:56 PM Login attempt made with email: jon.jones@university.com
+05/18/2024 03:09:56 PM Login attempt successful
+05/18/2024 03:26:48 PM Login attempt made with email: jon.joness@university.com
+05/18/2024 03:26:48 PM Login attempt unsuccessful: Incorrect email or password format
+05/18/2024 03:27:05 PM Login attempt made with email: jon.jones@university.com
+05/18/2024 03:27:05 PM Login attempt unsuccessful: Incorrect email or password format
+05/18/2024 03:29:00 PM Login attempt made with email: jon.jones@university.com
+05/18/2024 03:29:00 PM Login attempt successful
+05/18/2024 03:31:06 PM Login attempt made with email: jon.jones@university.com
+05/18/2024 03:31:06 PM Login attempt unsuccessful: Incorrect email or password format
+05/20/2024 03:15:13 AM Login attempt made with email: jon.jones@university.com
+05/20/2024 03:15:13 AM Login attempt successful
+05/20/2024 03:20:19 AM Login attempt made with email: jon.jones@university.com
+05/20/2024 03:20:19 AM Login attempt successful
+05/20/2024 03:31:31 AM Login attempt made with email: jon.jones@university.com
+05/20/2024 03:31:31 AM Login attempt successful
+05/20/2024 03:33:04 AM Login attempt made with email: 
+05/20/2024 03:33:04 AM Login attempt unsuccessful: Incorrect email or password format
+05/20/2024 03:36:18 AM Login attempt made with email: jon.jones@university.com
+05/20/2024 03:36:18 AM Login attempt successful
+05/20/2024 11:43:52 AM Login attempt made with email: jon.jones@university.com
+05/20/2024 11:43:52 AM Login attempt successful
+05/20/2024 11:55:32 AM Login attempt made with email: jonjones@university.com
+05/20/2024 11:55:32 AM Login attempt unsuccessful: Incorrect email or password
+05/20/2024 11:55:44 AM Login attempt made with email: jon.jones@university.com
+05/20/2024 11:55:44 AM Login attempt successful
+05/20/2024 11:57:18 AM Login attempt made with email: jon.jones@university.com
+05/20/2024 11:57:18 AM Login attempt successful
+05/20/2024 11:58:48 AM Login attempt made with email: jon.jones@university.com
+05/20/2024 11:58:48 AM Login attempt successful
+05/20/2024 12:00:23 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 12:00:23 PM Login attempt successful
+05/20/2024 12:06:07 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 12:06:07 PM Login attempt unsuccessful: Incorrect email or password format
+05/20/2024 12:12:41 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 12:12:41 PM Login attempt successful
+05/20/2024 12:15:01 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 12:15:01 PM Login attempt successful
+05/20/2024 01:10:03 PM Login attempt made with email: jon.jone@university.com
+05/20/2024 01:10:03 PM Login attempt unsuccessful: Incorrect email or password
+05/20/2024 01:10:17 PM Login attempt made with email: jon.jone@university.com
+05/20/2024 01:10:17 PM Login attempt unsuccessful: Incorrect email or password
+05/20/2024 01:10:41 PM Login attempt made with email: jon.jones@university.co
+05/20/2024 01:10:41 PM Login attempt unsuccessful: Incorrect email or password format
+05/20/2024 01:10:52 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 01:10:52 PM Login attempt unsuccessful: Incorrect email or password
+05/20/2024 01:37:23 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 01:37:23 PM Login attempt successful
+05/20/2024 02:22:53 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 02:22:54 PM Login attempt successful
+05/20/2024 02:25:28 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 02:25:28 PM Login attempt successful
+05/20/2024 02:26:17 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 02:26:17 PM Login attempt successful
+05/20/2024 02:47:01 PM Login attempt made with email: jon.jones@university.coim
+05/20/2024 02:47:01 PM Login attempt unsuccessful: Incorrect email or password format
+05/20/2024 02:47:08 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 02:47:08 PM Login attempt unsuccessful: Incorrect email or password format
+05/20/2024 02:47:21 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 02:47:21 PM Login attempt unsuccessful: Incorrect email or password
+05/20/2024 06:28:25 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 06:28:25 PM Login attempt successful
+05/20/2024 06:45:46 PM Login attempt made with email: joe.jones@university.com
+05/20/2024 06:45:46 PM Login attempt unsuccessful: Incorrect email or password
+05/20/2024 06:45:55 PM Login attempt made with email: joe.jones@university.com
+05/20/2024 06:45:55 PM Login attempt unsuccessful: Incorrect email or password
+05/20/2024 06:46:08 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 06:46:08 PM Login attempt successful
+05/20/2024 06:50:36 PM Login attempt made with email: jon.jones@university.com
+05/20/2024 06:50:36 PM Login attempt successful
+05/20/2024 07:16:19 PM Login attempt made with email: par.shi@university.com
+05/20/2024 07:16:19 PM Login attempt unsuccessful: Incorrect email or password
+05/20/2024 07:16:28 PM Login attempt made with email: par.shi@university.com
+05/20/2024 07:16:28 PM Login attempt successful
+05/20/2024 07:17:23 PM Login attempt made with email: par.shi@university.com
+05/20/2024 07:17:23 PM Login attempt unsuccessful: Incorrect email or password format
+05/20/2024 07:17:33 PM Login attempt made with email: par.shi@univrsity.com
+05/20/2024 07:17:33 PM Login attempt unsuccessful: Incorrect email or password format
+05/20/2024 07:17:54 PM Login attempt made with email: par.shi@university.com
+05/20/2024 07:17:54 PM Login attempt successful
