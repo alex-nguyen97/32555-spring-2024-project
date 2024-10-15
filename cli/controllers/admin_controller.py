@@ -23,7 +23,7 @@ class AdminController:
 
         for student in students:
             grade = student.grade
-            
+
             if grade not in grade_groups:
                 grade_groups[grade] = []
 

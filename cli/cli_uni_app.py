@@ -3,7 +3,7 @@ from .controllers.admin_controller import AdminController
 from .views.student_view import StudentView
 from .views.admin_view import AdminView
 from colors.text_colors import *
-from .utils.utils import ErrorHandling
+from .utils.utils import ErrorMessageHandling
 
 class CLISystem:
     def __init__(self):
@@ -30,7 +30,7 @@ class CLISystem:
                 print(YELLOW + "Thank you!!" + RESET)
                 break
             else:
-                ErrorHandling.printInvalidEntry()
+                ErrorMessageHandling.printInvalidEntry()
 
     def show_admin_menu(self):
         while True:
@@ -56,7 +56,7 @@ class CLISystem:
                 print(YELLOW + "Admin System is Exiting..." + RESET)
                 break
             else:
-                ErrorHandling.printInvalidEntry()
+                ErrorMessageHandling.printInvalidEntry()
 
     def show_student_menu(self):
         while True:
@@ -73,7 +73,7 @@ class CLISystem:
                 print(YELLOW + "Student System is Exiting..." + RESET)
                 break
             else:
-                ErrorHandling.printInvalidEntry()
+                ErrorMessageHandling.printInvalidEntry()
 
 if __name__ == "__main__":
     cli_system = CLISystem()
