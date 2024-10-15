@@ -1,0 +1,20 @@
+[
+    {
+        "ID": "137351",
+        "name": "1234",
+        "email": "nthung",
+        "password": "1234",
+        "subjects": [],
+        "mark": 0.0,
+        "grade": "P"
+    },
+    {
+        "ID": "586070",
+        "name": "123",
+        "email": "nthung11",
+        "password": "123",
+        "subjects": [],
+        "mark": 0.0,
+        "grade": "P"
+    }
+]

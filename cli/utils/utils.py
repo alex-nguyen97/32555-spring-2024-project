@@ -10,6 +10,7 @@ def printErrorMessage(errorMessage):
 
 def printSuccessMessage(successMessage): 
     print(GREEN + successMessage + RESET)
+    
 class ErrorMessageHandling:
     def printInvalidEntry():
         printErrorMessage("Invalid choice. Please select again.")

@@ -7,14 +7,18 @@ import re
 
 
 class Student:
-    def __init__(self, name, email, password):
-        self.ID = self.generate_ID()
+    def __init__(self, name, email, password, ID=None, subjects=None, mark=0.0, grade="P"):
+        if ID is None:
+            self.ID = self.generate_ID()
+        else:
+            self.ID = ID
+        
         self.name = name
         self.email = email
         self.password = password
-        self.subjects = []
-        self.mark = 0.0
-        self.grade = "P"
+        self.subjects = subjects if subjects is not None else []
+        self.mark = mark
+        self.grade = grade
 
     def generate_ID(self):
         return str(random.randint(1, 999999)).zfill(6)
@@ -112,6 +116,16 @@ class Student:
         else:
             print(YELLOW + "Showing 0 subjects.")
 
+    def to_dict(self):
+        return {
+            "ID": self.ID,
+            "name": self.name,
+            "email": self.email,
+            "password": self.password,
+            "subjects": self.subjects,
+            "mark": self.mark,
+            "grade": self.grade
+        }
     # def get_enrolled_subjects(self):
     #     enrolled_subjects = []
     #     if self.subjects:
