@@ -23,7 +23,7 @@ class AdminController:
 
         for student in students:
             grade = student.grade
-
+            
             if grade not in grade_groups:
                 grade_groups[grade] = []
 
@@ -31,7 +31,6 @@ class AdminController:
 
         for grade, students in grade_groups.items():
             for student in students:
-        
                 print(f"{grade} --> [{student.name} :: {student.ID} --> Grade: {student.grade} - Mark: {student.mark}]")
 
     def partition_students_by_pass_fail(self):

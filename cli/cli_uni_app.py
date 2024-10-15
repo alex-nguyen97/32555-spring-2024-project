@@ -3,7 +3,6 @@ from .controllers.admin_controller import AdminController
 from .views.student_view import StudentView
 from .views.admin_view import AdminView
 from colors.text_colors import *
-from .utils.utils import Utils
 from .utils.utils import ErrorHandling
 
 class CLISystem:
@@ -16,11 +15,11 @@ class CLISystem:
     def run(self):
         print(CYAN + "Welcome to the University System" + RESET)
         while True:
-            print(CYAN + "Please select the following actions for University System: ")
+            print(CYAN + "\nPlease select the following actions for University System: " + RESET)
             print("(A) Admin")
             print("(S) Student")
             print("(X) Exit")
-            choice = input("Your choice: " + RESET).lower()
+            choice = input(CYAN + "Your choice: " + RESET).lower()
 
             if choice == "a":
                 self.show_admin_menu()
@@ -35,14 +34,14 @@ class CLISystem:
 
     def show_admin_menu(self):
         while True:
-            print(CYAN + "Please select the following actions for Admin System: ")
+            print(CYAN + "\nPlease select the following actions for Admin System: " + RESET)
             print("(C) Clear Database")
             print("(G) Group Students")
             print("(P) Partition Student")
             print("(R) Remove Student")
             print("(S) Show")
             print("(X) Exit")
-            choice = input("Your choice: " + RESET).lower()
+            choice = input(CYAN + "Your choice: " + RESET).lower()
             if choice == "c":
                 self.admin_controller.clear_database()
             elif choice == "g":
@@ -54,22 +53,24 @@ class CLISystem:
             elif choice == "s":
                 self.admin_controller.show_students_list()
             elif choice == "x":
+                print(YELLOW + "Admin System is Exiting..." + RESET)
                 break
             else:
                 ErrorHandling.printInvalidEntry()
 
     def show_student_menu(self):
         while True:
-            print(CYAN + "Please select the following actions for Student System: ")
+            print(CYAN + "\n Please select the following actions for Student System: " + RESET)
             print("(L) Login")
             print("(R) Register")
             print("(X) Exit")
-            choice = input("Your choice: " + RESET).lower()
+            choice = input(CYAN + "Your choice: " + RESET).lower()
             if choice == "l":
                 self.student_controller.login_student()
             elif choice == "r":
                 self.student_controller.register_student()
             elif choice == "x":
+                print(YELLOW + "Student System is Exiting..." + RESET)
                 break
             else:
                 ErrorHandling.printInvalidEntry()

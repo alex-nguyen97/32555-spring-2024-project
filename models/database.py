@@ -28,7 +28,6 @@ class Database:
         try:
             with open(Database.FILE_NAME, "rb") as file:
                 objects = pickle.load(file)
-            # print("Objects read from file.")
             return objects
         except (EOFError, FileNotFoundError):
             return []
@@ -36,7 +35,6 @@ class Database:
     @staticmethod
     def clear_file_data():
         open(Database.FILE_NAME, "w").close()
-        #print("File data cleared.")
 
     @staticmethod
     def update_student(student):
