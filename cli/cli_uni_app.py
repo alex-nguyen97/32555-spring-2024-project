@@ -4,6 +4,7 @@ from .views.student_view import StudentView
 from .views.admin_view import AdminView
 from colors.text_colors import *
 from .utils.utils import Utils
+from .utils.utils import ErrorHandling
 
 class CLISystem:
     def __init__(self):
@@ -13,49 +14,65 @@ class CLISystem:
         self.admin_controller = AdminController()
 
     def run(self):
+        print(CYAN + "Welcome to the University System" + RESET)
         while True:
-            choice = input(CYAN + "University System: (A)dmin, (S)tudent, or X: " + RESET)
+            print(CYAN + "Please select the following actions for University System: ")
+            print("(A) Admin")
+            print("(S) Student")
+            print("(X) Exit")
+            choice = input("Your choice: " + RESET).lower()
 
-            if choice.lower() == "a":
-                self.handle_admin_menu()
-            elif choice.lower() == "s":
-                self.handle_student_menu()
-            elif choice.lower() == "x":
-                print(YELLOW + "Thank you" + RESET)
+            if choice == "a":
+                self.show_admin_menu()
+            elif choice == "s":
+                self.show_student_menu()
+            elif choice == "x":
+                print(YELLOW + "System is Exiting...")
+                print(YELLOW + "Thank you!!" + RESET)
                 break
             else:
-                Utils.printInvalidEntry()
+                ErrorHandling.printInvalidEntry()
 
-    def handle_admin_menu(self):
+    def show_admin_menu(self):
         while True:
-            choice = input(CYAN + "\nAdmin System (c/g/p/r/s/x): " + RESET)
-            if choice.lower() == "c":
+            print(CYAN + "Please select the following actions for Admin System: ")
+            print("(C) Clear Database")
+            print("(G) Group Students")
+            print("(P) Partition Student")
+            print("(R) Remove Student")
+            print("(S) Show")
+            print("(X) Exit")
+            choice = input("Your choice: " + RESET).lower()
+            if choice == "c":
                 self.admin_controller.clear_database()
-            elif choice.lower() == "g":
+            elif choice == "g":
                 self.admin_controller.group_students_by_grade()
-            elif choice.lower() == "p":
+            elif choice == "p":
                 self.admin_controller.partition_students_by_pass_fail()
-            elif choice.lower() == "r":
+            elif choice == "r":
                 self.admin_controller.remove_student_by_id()
-            elif choice.lower() == "s":
+            elif choice == "s":
                 self.admin_controller.show_students_list()
-            elif choice.lower() == "x":
+            elif choice == "x":
                 break
             else:
-                print(RED + "Invalid choice. Please select again." + RESET)
+                ErrorHandling.printInvalidEntry()
 
-    def handle_student_menu(self):
+    def show_student_menu(self):
         while True:
-            choice = input(CYAN + "Student Stytem (l/r/x): " + RESET)
-
-            if choice.lower() == "l":
+            print(CYAN + "Please select the following actions for Student System: ")
+            print("(L) Login")
+            print("(R) Register")
+            print("(X) Exit")
+            choice = input("Your choice: " + RESET).lower()
+            if choice == "l":
                 self.student_controller.login_student()
-            elif choice.lower() == "r":
+            elif choice == "r":
                 self.student_controller.register_student()
-            elif choice.lower() == "x":
+            elif choice == "x":
                 break
             else:
-                Utils.printInvalidEntry()
+                ErrorHandling.printInvalidEntry()
 
 if __name__ == "__main__":
     cli_system = CLISystem()

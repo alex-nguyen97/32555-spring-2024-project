@@ -5,5 +5,6 @@ class Utils:
     EMAIL_REGEX = r"^[a-z.]+@university\.com$"
     PASSWORD_REGEX = r"^[A-Z][a-zA-Z]{5,}[0-9]{3,}$"
 
+class ErrorHandling:
     def printInvalidEntry():
         print(RED + "Invalid choice. Please select again." + RESET)
