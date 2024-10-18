@@ -12,7 +12,6 @@ class StudentController:
     def __init__(self):
         self.view = StudentView()
         student_loaded= Database.read_objects_from_file()
-        print(student_loaded)
         students_objects = [
             Student(student["name"], 
                     student["email"], 

@@ -1,14 +1,26 @@
 from models.database import Database
 from ..views.admin_view import AdminView
 from colors.text_colors import *
-
+from models.student import Student
 class AdminController:
     def __init__(self):
         self.view = AdminView()
+        student_loaded= Database.read_objects_from_file()
+        students_objects = [
+            Student(student["name"], 
+                    student["email"], 
+                    student["password"], 
+                    student["ID"], 
+                    student["subjects"], 
+                    student["mark"], 
+                    student["grade"]) 
+                    for student in student_loaded
+        ]
+        self.student_list = students_objects
 
     def show_students_list(self):
         print(YELLOW + "Student List" + RESET)
-        students = Database.read_objects_from_file()
+        students = self.student_list
         if not students:
             print("     < Nothing to Display >")
             return
@@ -18,7 +30,7 @@ class AdminController:
 
     def group_students_by_grade(self):
         print(YELLOW + "Grade Grouping" + RESET)
-        students = Database.read_objects_from_file()
+        students = self.student_list
         grade_groups = {}
 
         for student in students:
@@ -34,7 +46,7 @@ class AdminController:
                 print(f"{grade} --> [{student.name} :: {student.ID} --> Grade: {student.grade} - Mark: {student.mark}]")
 
     def partition_students_by_pass_fail(self):
-        students = Database.read_objects_from_file()
+        students = self.student_list
         pass_students = []
         fail_students = []
 
@@ -58,7 +70,7 @@ class AdminController:
 
     def remove_student_by_id(self):
         student_id_to_remove = input("Remove by ID: ")
-        students = Database.read_objects_from_file()
+        students = self.student_list
         for student in students:
             if student.ID == student_id_to_remove:
                 students.remove(student)
