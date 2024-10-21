@@ -60,7 +60,7 @@ class CLISystem:
 
     def show_student_menu(self):
         while True:
-            print(CYAN + "\n Please select the following actions for Student System: " + RESET)
+            print(CYAN + "\nPlease select the following actions for Student System: " + RESET)
             print("(L) Login")
             print("(R) Register")
             print("(X) Exit")

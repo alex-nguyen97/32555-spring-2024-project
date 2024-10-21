@@ -43,7 +43,9 @@ class AdminController:
 
         for grade, students in grade_groups.items():
             for student in students:
-                print(f"{grade} --> [{student.name} :: {student.ID} --> Grade: {student.grade} - Mark: {student.mark}]")
+                student_detail = self.print_student_details(student)
+                print(f"{grade} --> {student_detail}")
+
 
     def partition_students_by_pass_fail(self):
         students = self.student_list
@@ -65,8 +67,12 @@ class AdminController:
     def format_students(self, status, students):
         formatted_students = []
         for student in students:
-            formatted_students.append(f"{student.name} :: ID --> {student.ID} - GRADE: {student.grade} - MARK: {student.mark:.2f}")
+            student_detail = self.print_student_details(student)
+            formatted_students.append(student_detail)
         return f"[{status}] --> {formatted_students}"
+    
+    def print_student_details(self, student): 
+        return (f"{student.name} :: ID --> {student.ID} - GRADE: {student.grade} - MARK: {student.mark:.2f}")
 
     def remove_student_by_id(self):
         student_id_to_remove = input("Remove by ID: ")

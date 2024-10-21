@@ -50,11 +50,11 @@ class LoginWindow:
         # Log the login attempt
         logging.info('Login attempt made with email: %s', self.email_entry.get())
 
-        if not re.match(Utils.EMAIL_REGEX, self.email_entry.get()) or not re.match(Utils.PASSWORD_REGEX, self.password_entry.get()):
-            error_message = "Incorrect email or password format"
-            self.show_error(error_message)
-            logging.info('Login attempt unsuccessful: %s', error_message)
-            return      # After displaying error message
+        # if not re.match(Utils.EMAIL_REGEX, self.email_entry.get()) or not re.match(Utils.PASSWORD_REGEX, self.password_entry.get()):
+        #     error_message = "Incorrect email or password format"
+        #     self.show_error(error_message)
+        #     logging.info('Login attempt unsuccessful: %s', error_message)
+        #     return      # After displaying error message
 
         students = Database.read_objects_from_file() # Read students from database file
         for student in students:
