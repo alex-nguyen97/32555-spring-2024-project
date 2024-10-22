@@ -1,9 +1,9 @@
 [
     {
         "ID": "137351",
-        "name": "1234",
-        "email": "nthung",
-        "password": "1234",
+        "name": "John Doe",
+        "email": "john.doe@university.com",
+        "password": "JohnDoe4567",
         "subjects": [],
         "mark": 0.0,
         "grade": "P"

@@ -1,6 +1,8 @@
 import json
 from cli.utils.utils import ErrorMessageHandling
 from cli.utils.utils import SuccessMessageHandling
+
+
 class Database:
     FILE_NAME = "students.json"
 

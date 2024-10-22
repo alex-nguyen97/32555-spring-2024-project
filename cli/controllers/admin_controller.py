@@ -2,19 +2,21 @@ from models.database import Database
 from ..views.admin_view import AdminView
 from colors.text_colors import *
 from models.student import Student
+
+
 class AdminController:
     def __init__(self):
         self.view = AdminView()
-        student_loaded= Database.read_objects_from_file()
+        student_loaded = Database.read_objects_from_file()
         students_objects = [
-            Student(student["name"], 
-                    student["email"], 
-                    student["password"], 
-                    student["ID"], 
-                    student["subjects"], 
-                    student["mark"], 
-                    student["grade"]) 
-                    for student in student_loaded
+            Student(student["name"],
+                    student["email"],
+                    student["password"],
+                    student["ID"],
+                    student["subjects"],
+                    student["mark"],
+                    student["grade"])
+            for student in student_loaded
         ]
         self.student_list = students_objects
 
@@ -46,7 +48,6 @@ class AdminController:
                 student_detail = self.print_student_details(student)
                 print(f"{grade} --> {student_detail}")
 
-
     def partition_students_by_pass_fail(self):
         students = self.student_list
         pass_students = []
@@ -60,7 +61,7 @@ class AdminController:
 
         fail_str = self.format_students("FAIL", fail_students)
         pass_str = self.format_students("PASS", pass_students)
-        
+
         print(pass_str)
         print(fail_str)
 
@@ -70,8 +71,8 @@ class AdminController:
             student_detail = self.print_student_details(student)
             formatted_students.append(student_detail)
         return f"[{status}] --> {formatted_students}"
-    
-    def print_student_details(self, student): 
+
+    def print_student_details(self, student):
         return (f"{student.name} :: ID --> {student.ID} - GRADE: {student.grade} - MARK: {student.mark:.2f}")
 
     def remove_student_by_id(self):
@@ -80,15 +81,16 @@ class AdminController:
         for student in students:
             if student.ID == student_id_to_remove:
                 students.remove(student)
-                print(f"{YELLOW}Removing Student {student_id_to_remove} account.{RESET}")
+                # print(f"{YELLOW}Removing Student {student_id_to_remove} account.{RESET}")
                 Database.write_objects_to_file(students)
                 return
         print(f"{RED}Student {student_id_to_remove} does not exist{RESET}")
 
     def clear_database(self):
-        student_id_clear = input(RED + "Are you sure you want to clear the database (Y)ES/(N)O: ")
+        student_id_clear = input(
+            RED + "Are you sure you want to clear the database (Y)ES/(N)O: ")
         if student_id_clear == "Y":
             Database.clear_file_data()
             self.view.display_message(YELLOW + "Students data cleared")
-        else :
+        else:
             return

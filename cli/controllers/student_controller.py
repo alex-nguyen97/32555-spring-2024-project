@@ -6,21 +6,28 @@ from colors.text_colors import *
 import re
 import random
 from ..utils.utils import Utils
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+ENVIRONMENT = os.getenv('ENVIRONMENT')
+STUDENT_EMAIL = os.getenv('STUDENT_EMAIL')
+STUDENT_PASSWORD = os.getenv('STUDENT_PASSWORD')
 
 
 class StudentController:
     def __init__(self):
         self.view = StudentView()
-        student_loaded= Database.read_objects_from_file()
+        student_loaded = Database.read_objects_from_file()
         students_objects = [
-            Student(student["name"], 
-                    student["email"], 
-                    student["password"], 
-                    student["ID"], 
-                    student["subjects"], 
-                    student["mark"], 
-                    student["grade"]) 
-                    for student in student_loaded
+            Student(student["name"],
+                    student["email"],
+                    student["password"],
+                    student["ID"],
+                    student["subjects"],
+                    student["mark"],
+                    student["grade"])
+            for student in student_loaded
         ]
         self.student_list = students_objects
 
@@ -32,8 +39,7 @@ class StudentController:
             password = input("Password: ")
 
             # Validate email and password
-            # if not re.match(Utils.EMAIL_REGEX, email) or not re.match(Utils.PASSWORD_REGEX, password):
-            if(False):
+            if not re.match(Utils.EMAIL_REGEX, email) or not re.match(Utils.PASSWORD_REGEX, password):
                 print(RED + "Incorrect email or password format." + RESET)
             else:
                 print(YELLOW + "Email and password formats acceptable." + RESET)
@@ -43,7 +49,7 @@ class StudentController:
                     print(f"{RED}Student {student_name} already exists{RESET}")
                 else:
                     break
-        
+
         # Collect name
         name = input("Name: ")
 
@@ -65,16 +71,19 @@ class StudentController:
         print(GREEN + "Student Sign In" + RESET)
         while True:
             # Collect email and password
-            email = input("Email: ")
-            password = input("Password: ")
+            if (ENVIRONMENT == 'dev' and STUDENT_EMAIL != None and STUDENT_PASSWORD != None):
+                email = STUDENT_EMAIL
+                password = STUDENT_PASSWORD
+            else:
+                email = input("Email: ")
+                password = input("Password: ")
 
             # Validate email and password
-            # if not re.match(Utils.EMAIL_REGEX, email) or not re.match(Utils.PASSWORD_REGEX, password):
-            if(False):
+            if not re.match(Utils.EMAIL_REGEX, email) or not re.match(Utils.PASSWORD_REGEX, password):
                 print(RED + "Incorrect email or password format." + RESET)
             else:
                 print(YELLOW + "Email and password formats acceptable." + RESET)
-                break    
+                break
 
         for student in self.student_list:
             if student.email == email and student.password == password:
@@ -102,7 +111,7 @@ class StudentController:
                 student.change_password()
             elif choice == "e":
                 subject = Subject(random.randint(100, 999))
-                #print(YELLOW + "Enrolling in Subject-" + str(subject.ID) + RESET)
+                # print(YELLOW + "Enrolling in Subject-" + str(subject.ID) + RESET)
                 student.enrol_subject(subject)
             elif choice == "r":
                 student.drop_subject()
