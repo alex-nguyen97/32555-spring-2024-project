@@ -1,4 +1,4 @@
-import random 
+import random
 from models.database import Database
 from colors.text_colors import *
 from models.subject import Subject
@@ -12,7 +12,15 @@ class Student:
             self.ID = self.generate_ID()
         else:
             self.ID = ID
-        
+
+        if subjects is None:
+            self.subjects = []
+        else:
+            self.subjects = [
+                Subject(subject["ID"], subject["mark"], subject["grade"])
+                for subject in subjects
+            ]
+
         self.name = name
         self.email = email
         self.password = password
@@ -27,9 +35,11 @@ class Student:
         if len(self.subjects) < 4:
             print(YELLOW + "Enrolling in Subject-" + str(subject.ID) + RESET)
             self.subjects.append(subject)
-            print(YELLOW + "You are now enrolled in " + str(len(self.subjects)) + " out of 4 subjects" + RESET)
+            print(YELLOW + "You are now enrolled in " +
+                  str(len(self.subjects)) + " out of 4 subjects" + RESET)
             # Recalculate marks and grades . . .
-            self.mark = sum(subject.mark for subject in self.subjects) / len(self.subjects)
+            self.mark = sum(
+                subject.mark for subject in self.subjects) / len(self.subjects)
             if self.mark >= 50:
                 self.grade = "P"
             else:
@@ -43,7 +53,8 @@ class Student:
         if len(self.subjects) < 4:
             self.subjects.append(subject)
             # Recalculate marks and grades . . .
-            self.mark = sum(subject.mark for subject in self.subjects) / len(self.subjects)
+            self.mark = sum(
+                subject.mark for subject in self.subjects) / len(self.subjects)
             if self.mark >= 50:
                 self.grade = "P"
             else:
@@ -58,10 +69,13 @@ class Student:
         for subject in self.subjects:
             if str(subject.ID) == subject_id_to_drop:
                 self.subjects.remove(subject)
-                print(YELLOW + "Dropping Subject " + subject_id_to_drop + RESET)
-                print(YELLOW + "You are now enrolled in " + str(len(self.subjects)) + " out of 4 subjects" + RESET)
+                print(YELLOW + "Dropping Subject " +
+                      subject_id_to_drop + RESET)
+                print(YELLOW + "You are now enrolled in " +
+                      str(len(self.subjects)) + " out of 4 subjects" + RESET)
                 # Recalculate marks and grades . . .
-                self.mark = sum(subject.mark for subject in self.subjects) / len(self.subjects)
+                self.mark = sum(
+                    subject.mark for subject in self.subjects) / len(self.subjects)
                 if self.mark >= 50:
                     self.grade = "P"
                 else:
@@ -75,7 +89,8 @@ class Student:
             if str(subject.ID) == id:
                 self.subjects.remove(subject)
                 # Recalculate marks and grades . . .
-                self.mark = sum(subject.mark for subject in self.subjects) / len(self.subjects)
+                self.mark = sum(
+                    subject.mark for subject in self.subjects) / len(self.subjects)
                 if self.mark >= 50:
                     self.grade = "P"
                 else:
@@ -112,23 +127,28 @@ class Student:
         if self.subjects:
             print("Enrolled Subjects:")
             for subject in self.subjects:
-                print(f"[ Subject:: {subject.ID} -- mark = {subject.mark} -- grade = {subject.grade} ]")
+                print(
+                    f"[ Subject:: {subject.ID} -- mark = {subject.mark} -- grade = {subject.grade} ]")
         else:
             print(YELLOW + "Showing 0 subjects.")
 
     def to_dict(self):
+        subjects = []
+        if self.subjects is not None:
+            for subject in self.subjects:
+                subject_dict = {
+                    "ID": subject.ID,
+                    "mark": subject.mark,
+                    "grade": subject.grade,
+                }
+                subjects.append(subject_dict)
+
         return {
             "ID": self.ID,
             "name": self.name,
             "email": self.email,
             "password": self.password,
-            "subjects": self.subjects,
+            "subjects": subjects,
             "mark": self.mark,
             "grade": self.grade
         }
-    # def get_enrolled_subjects(self):
-    #     enrolled_subjects = []
-    #     if self.subjects:
-    #         for subject in self.subjects:
-    #             enrolled_subjects.append(subject)
-    #     return enrolled_subjects

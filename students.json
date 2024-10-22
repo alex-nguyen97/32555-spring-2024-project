@@ -4,8 +4,29 @@
         "name": "John Doe",
         "email": "john.doe@university.com",
         "password": "JohnDoe4567",
-        "subjects": [],
-        "mark": 0.0,
+        "subjects": [
+            {
+                "ID": 605,
+                "mark": 53,
+                "grade": "P"
+            },
+            {
+                "ID": 532,
+                "mark": 82,
+                "grade": "D"
+            },
+            {
+                "ID": 692,
+                "mark": 99,
+                "grade": "HD"
+            },
+            {
+                "ID": 589,
+                "mark": 83,
+                "grade": "D"
+            }
+        ],
+        "mark": 79.25,
         "grade": "P"
     },
     {

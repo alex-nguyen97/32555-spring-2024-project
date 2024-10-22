@@ -8,6 +8,7 @@ import random
 from ..utils.utils import Utils
 import os
 from dotenv import load_dotenv
+from ..utils.utils import ErrorMessageHandling
 
 load_dotenv()
 ENVIRONMENT = os.getenv('ENVIRONMENT')
@@ -63,7 +64,6 @@ class StudentController:
 
         self.student_list.append(student)
         print(YELLOW + "Enrolling Student " + name + RESET)
-
         students_dict = [student.to_dict() for student in self.student_list]
         Database.write_objects_to_file(students_dict)
 
@@ -106,18 +106,27 @@ class StudentController:
     # After login . . .
     def student_course_menu(self, student):
         while True:
-            choice = input(CYAN + "Student Course Menu (c/e/r/s/x): " + RESET)
-            if choice == "c":
+            print(
+                CYAN + "\nPlease select the following actions for Student Course Menu: " + RESET)
+            print("(C) Change: Change the password.")
+            print(
+                "(E) Enrol: Enrol in a subject. A student can enrol in a maximum of four (4) subjects.")
+            print("(R) Remove: Remove a subject from the enrolment list.")
+            print("(S) Show: Shows the enrolled subjects with their marks and grades.")
+            print("(X) Exit")
+
+            option = input(CYAN + "Your choice: " + RESET)
+
+            if option == "c":
                 student.change_password()
-            elif choice == "e":
+            elif option == "e":
                 subject = Subject(random.randint(100, 999))
-                # print(YELLOW + "Enrolling in Subject-" + str(subject.ID) + RESET)
                 student.enrol_subject(subject)
-            elif choice == "r":
+            elif option == "r":
                 student.drop_subject()
-            elif choice == "s":
+            elif option == "s":
                 student.show_enrolled_subjects()
-            elif choice == "x":
+            elif option == "x":
                 break
             else:
-                print("Invalid choice. Please try again.")
+                ErrorMessageHandling.printInvalidEntry()

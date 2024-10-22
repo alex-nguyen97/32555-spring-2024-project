@@ -45,8 +45,9 @@ class Database:
     def update_student(student):
         students = Database.read_objects_from_file()
         for i, s in enumerate(students):
-            if s.email == student.email:
-                students[i] = student
+            if s['email'] == student.email:
+                transformed_student = student.to_dict()
+                students[i] = transformed_student
                 Database.write_objects_to_file(students)
                 SuccessMessageHandling.printUpdateStudentSuccessful()
                 return True
