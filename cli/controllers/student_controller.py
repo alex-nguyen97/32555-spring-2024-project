@@ -51,7 +51,7 @@ class StudentController:
                 print(RED + "Incorrect email or password format." + RESET)
             else:
                 print(YELLOW + "Email and password formats acceptable." + RESET)
-                # Check if email exists already . . .
+                # Check if email exists already
                 student_name = self.check_student_exists_by_email(email)
                 if student_name is not None:
                     print(f"{RED}Student {student_name} already exists{RESET}")
@@ -65,7 +65,6 @@ class StudentController:
         student = Student(name, email, password)
 
         # Save student to database
-        # Ensure that students is not None
         if self.student_list is None:
             self.student_list = []
 
@@ -78,7 +77,7 @@ class StudentController:
         print(GREEN + "Student Sign In" + RESET)
         while True:
             # Collect email and password
-            if (ENVIRONMENT == 'dev' and STUDENT_EMAIL != None and STUDENT_PASSWORD != None):
+            if ENVIRONMENT == 'dev' and STUDENT_EMAIL is not None and STUDENT_PASSWORD is not None:
                 email = STUDENT_EMAIL
                 password = STUDENT_PASSWORD
             else:
@@ -97,6 +96,7 @@ class StudentController:
                 # If found, display login success message
                 self.student_course_menu(student)
                 return student
+
         # If not found, display error message
         self.view.display_error(RED + "Student does not exist" + RESET)
         return None
@@ -119,7 +119,7 @@ class StudentController:
             print(
                 "(E) Enrol: Enrol in a subject. A student can enrol in a maximum of four (4) subjects.")
             print("(R) Remove: Remove a subject from the enrolment list.")
-            print("(S) Show: Shows the enrolled subjects with their marks and grades.")
+            print("(S) Show All Students: Shows the enrolled subjects with their marks and grades.")
             print("(X) Exit")
 
             option = input(CYAN + "Your choice: " + RESET).lower()
@@ -127,8 +127,12 @@ class StudentController:
             if option == "c":
                 student.change_password()
             elif option == "e":
-                subject = Subject(random.randint(100, 999))
-                student.enrol_subject(subject)
+                if len(student.subjects) >= 4:
+                    print(RED + "You have already enrolled in the maximum of 4 subjects." + RESET)
+                else:
+                    subject = Subject(random.randint(100, 999))
+                    student.enrol_subject(subject)
+                    print(GREEN + "Enrolled in a new subject successfully." + RESET)
             elif option == "r":
                 student.drop_subject()
             elif option == "s":
