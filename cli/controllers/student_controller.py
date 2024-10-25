@@ -14,6 +14,9 @@ load_dotenv()
 ENVIRONMENT = os.getenv('ENVIRONMENT')
 STUDENT_EMAIL = os.getenv('STUDENT_EMAIL')
 STUDENT_PASSWORD = os.getenv('STUDENT_PASSWORD')
+STUDENT_EMAIL_REGISTER = os.getenv('STUDENT_EMAIL_REGISTER')
+STUDENT_PASSWORD_REGISTER = os.getenv('STUDENT_PASSWORD_REGISTER')
+STUDENT_NAME_REGISTER = os.getenv('STUDENT_NAME_REGISTER')
 
 
 class StudentController:
@@ -36,8 +39,12 @@ class StudentController:
         print(GREEN + "Student Sign Up" + RESET)
         while True:
             # Collect email and password
-            email = input("Email: ")
-            password = input("Password: ")
+            if (ENVIRONMENT == 'dev' and STUDENT_EMAIL_REGISTER != None and STUDENT_PASSWORD_REGISTER != None):
+                email = STUDENT_EMAIL_REGISTER
+                password = STUDENT_PASSWORD_REGISTER
+            else:
+                email = input("Email: ")
+                password = input("Password: ")
 
             # Validate email and password
             if not re.match(Utils.EMAIL_REGEX, email) or not re.match(Utils.PASSWORD_REGEX, password):

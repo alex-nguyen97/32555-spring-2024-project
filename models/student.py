@@ -24,7 +24,6 @@ class Student:
         self.name = name
         self.email = email
         self.password = password
-        self.subjects = subjects if subjects is not None else []
         self.mark = mark
         self.grade = grade
 
@@ -133,22 +132,23 @@ class Student:
             print(YELLOW + "Showing 0 subjects.")
 
     def to_dict(self):
-        subjects = []
+        subject_list = []
         if self.subjects is not None:
             for subject in self.subjects:
+                print(subject)
                 subject_dict = {
                     "ID": subject.ID,
                     "mark": subject.mark,
                     "grade": subject.grade,
                 }
-                subjects.append(subject_dict)
+                subject_list.append(subject_dict)
 
         return {
             "ID": self.ID,
             "name": self.name,
             "email": self.email,
             "password": self.password,
-            "subjects": subjects,
+            "subjects": subject_list,
             "mark": self.mark,
             "grade": self.grade
         }
