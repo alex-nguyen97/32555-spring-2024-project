@@ -119,7 +119,8 @@ class StudentController:
             print(
                 "(E) Enrol: Enrol in a subject. A student can enrol in a maximum of four (4) subjects.")
             print("(R) Remove: Remove a subject from the enrolment list.")
-            print("(S) Show All Students: Shows the enrolled subjects with their marks and grades.")
+            print(
+                "(S) Show All Students: Shows the enrolled subjects with their marks and grades.")
             print("(X) Exit")
 
             option = input(CYAN + "Your choice: " + RESET).lower()
@@ -127,12 +128,7 @@ class StudentController:
             if option == "c":
                 student.change_password()
             elif option == "e":
-                if len(student.subjects) >= 4:
-                    print(RED + "You have already enrolled in the maximum of 4 subjects." + RESET)
-                else:
-                    subject = Subject(random.randint(100, 999))
-                    student.enrol_subject(subject)
-                    print(GREEN + "Enrolled in a new subject successfully." + RESET)
+                student.enrol_subject()
             elif option == "r":
                 student.drop_subject()
             elif option == "s":

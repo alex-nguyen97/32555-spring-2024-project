@@ -30,8 +30,9 @@ class Student:
     def generate_ID(self):
         return str(random.randint(1, 999999)).zfill(6)
 
-    def enrol_subject(self, subject):
+    def enrol_subject(self):
         if len(self.subjects) < 4:
+            subject = Subject(random.randint(100, 999))
             print(YELLOW + "Enrolling in Subject-" + str(subject.ID) + RESET)
             self.subjects.append(subject)
             print(YELLOW + "You are now enrolled in " +
