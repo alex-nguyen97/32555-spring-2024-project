@@ -122,7 +122,7 @@ class StudentController:
             print("(S) Show: Shows the enrolled subjects with their marks and grades.")
             print("(X) Exit")
 
-            option = input(CYAN + "Your choice: " + RESET)
+            option = input(CYAN + "Your choice: " + RESET).lower()
 
             if option == "c":
                 student.change_password()
