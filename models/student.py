@@ -135,7 +135,6 @@ class Student:
         subject_list = []
         if self.subjects is not None:
             for subject in self.subjects:
-                print(subject)
                 subject_dict = {
                     "ID": subject.ID,
                     "mark": subject.mark,
