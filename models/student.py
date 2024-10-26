@@ -49,8 +49,8 @@ class Student:
             print(RED + "Students are allowed to enroll in 4 subjects only" + RESET)
 
     def enrol_subject_ui(self):
-        subject = Subject(random.randint(100, 999))
         if len(self.subjects) < 4:
+            subject = Subject(random.randint(100, 999))
             self.subjects.append(subject)
             # Recalculate marks and grades . . .
             self.mark = sum(
@@ -152,3 +152,15 @@ class Student:
             "mark": self.mark,
             "grade": self.grade
         }
+
+    @staticmethod
+    def convert_to_student_class(student):
+        return Student(
+            student["name"],
+            student["email"],
+            student["password"],
+            student.get("ID"),
+            student.get("subjects", []),
+            student.get("mark", 0.0),
+            student.get("grade", "P")
+        )

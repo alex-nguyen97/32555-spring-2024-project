@@ -9,13 +9,7 @@ class AdminController:
         self.view = AdminView()
         student_loaded = Database.read_objects_from_file()
         students_objects = [
-            Student(student["name"],
-                    student["email"],
-                    student["password"],
-                    student["ID"],
-                    student["subjects"],
-                    student["mark"],
-                    student["grade"])
+            Student.convert_to_student_class(student)
             for student in student_loaded
         ]
         self.student_list = students_objects

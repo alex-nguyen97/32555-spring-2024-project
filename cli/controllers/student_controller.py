@@ -1,10 +1,8 @@
 from models.student import Student
-from models.subject import Subject
 from models.database import Database
 from ..views.student_view import StudentView
 from colors.text_colors import *
 import re
-import random
 from ..utils.utils import Utils
 import os
 from dotenv import load_dotenv
@@ -24,13 +22,7 @@ class StudentController:
         self.view = StudentView()
         student_loaded = Database.read_objects_from_file()
         students_objects = [
-            Student(student["name"],
-                    student["email"],
-                    student["password"],
-                    student["ID"],
-                    student["subjects"],
-                    student["mark"],
-                    student["grade"])
+            Student.convert_to_student_class(student)
             for student in student_loaded
         ]
         self.student_list = students_objects

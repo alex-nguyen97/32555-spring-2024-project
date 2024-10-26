@@ -1,7 +1,7 @@
-import tkinter as tk
-from tkinter import ttk
+import customtkinter as ctk
 from models.database import Database
 from .error import ErrorWindow
+
 
 class SubjectEnrollmentWindow:
     def __init__(self, parent, navigate, student):
@@ -10,103 +10,86 @@ class SubjectEnrollmentWindow:
         self.student = student
         self.parent.title("Subject Enrollment")
 
-        # Create a frame for better organization
-        self.frame = ttk.Frame(parent)
-        self.frame.pack(fill=tk.BOTH, expand=True)
+        # Main frame setup
+        self.frame = ctk.CTkFrame(parent, corner_radius=10)
+        self.frame.pack(fill=ctk.BOTH, expand=True, padx=10, pady=10)
 
-        # Create a frame for subjects
-        self.subjects_frame = ttk.Frame(self.frame, padding=20)
-        self.subjects_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        # Frame for subjects
+        self.subjects_frame = ctk.CTkFrame(self.frame)
+        self.subjects_frame.pack(
+            side=ctk.LEFT, fill=ctk.BOTH, expand=True, padx=20, pady=10)
 
-        # Create subject list with delete buttons
-        self.subject_list = []
+        # Subject list with delete buttons
         self.subject_labels = []
         for idx, subject in enumerate(self.student.subjects):
-            subject_frame = ttk.Frame(self.subjects_frame, padding=(5, 2))
-            subject_frame.grid(row=idx, column=0, sticky="ew")
-            
-            # Create and position a label for each subject
-            subject_info = f" Subject ID: {subject.ID} - Mark: {subject.mark}"
-            subject_label = ttk.Label(subject_frame, text=subject_info, anchor="w")
-            subject_label.grid(row=0, column=0, sticky="w")
+            self.create_subject_frame(idx, subject)
 
-            # Create a delete button for each subject
-            delete_button = ttk.Button(subject_frame, text="Delete", command=lambda s=subject: self.delete_subject(s))
-            delete_button.grid(row=0, column=1, sticky="e")
-            # Add new subject label and delete button to the list
-            self.subject_labels.append((subject_label, delete_button))
-
-        # Create a frame for buttons
-        buttons_frame = ttk.Frame(self.frame)
-        buttons_frame.pack(side=tk.RIGHT)
+        # Frame for action buttons
+        buttons_frame = ctk.CTkFrame(self.frame)
+        buttons_frame.pack(side=ctk.RIGHT, padx=10, pady=10)
 
         # Enrollment button
-        self.enroll_button = ttk.Button(buttons_frame, text="Enroll", command=self.enroll)
-        self.enroll_button.pack(anchor=tk.E, padx=5, pady=10)
+        self.enroll_button = ctk.CTkButton(
+            buttons_frame, text="Enroll", command=self.enroll)
+        self.enroll_button.pack(anchor=ctk.E, padx=5, pady=10)
 
         # Logout button
-        self.logout_button = ttk.Button(buttons_frame, text="Logout", command=self.logout)
-        self.logout_button.pack(anchor=tk.E, padx=5, pady=5)
+        self.logout_button = ctk.CTkButton(
+            buttons_frame, text="Logout", command=self.logout)
+        self.logout_button.pack(anchor=ctk.E, padx=5, pady=5)
 
-        # Change password button
-        # self.change_password_button = ttk.Button(buttons_frame, text="Change Password", command=self.change_password)
-        # self.change_password_button.pack(anchor=tk.E, padx=5, pady=5)
-        
-        # Initially hide the window
+        # Hide window initially
         self.hide()
 
+    def create_subject_frame(self, idx, subject):
+        subject_frame = ctk.CTkFrame(
+            self.subjects_frame, corner_radius=5, fg_color="#ffffff")
+        subject_frame.grid(row=idx, column=0, sticky="ew", padx=5, pady=5)
+        subject_frame.grid_columnconfigure(0, weight=1)
+        # Label for each subject
+        subject_info = f"Subject ID: {subject.ID} - Mark: {subject.mark}"
+        subject_label = ctk.CTkLabel(
+            subject_frame, text=subject_info, anchor="w")
+        subject_label.grid(row=0, column=0, sticky="w", padx=10)
+
+        # Delete button for each subject
+        delete_button = ctk.CTkButton(
+            subject_frame, text="Delete", width=50, command=lambda s=subject: self.delete_subject(s))
+        delete_button.grid(row=0, column=1, sticky="e")
+        self.subject_labels.append((subject_label, delete_button))
+
     def delete_subject(self, subject):
-        # Remove the subject from the list and update the UI
+        # Remove subject from list and update UI
         if subject in self.student.subjects:
             self.student.subjects.remove(subject)
             Database.update_student(self.student)
             self.update_subject_list()
 
     def update_subject_list(self):
-        # Get the initial height of the subjects frame
-        initial_height = self.subjects_frame.winfo_reqheight()
+        # Clear current list and recreate it with updated data
+        for widget in self.subjects_frame.winfo_children():
+            widget.destroy()
 
-        # Clear the current subject list and re-create it with updated data
-        for subject_label, delete_button in self.subject_labels:
-            subject_label.destroy()
-            delete_button.destroy()
         self.subject_labels.clear()
 
         for idx, subject in enumerate(self.student.subjects):
-            subject_frame = ttk.Frame(self.subjects_frame, padding=(5, 2))
-            subject_frame.grid(row=idx, column=0, sticky="ew")
-            subject_info = f"Subject ID: {subject.ID} - Mark: {subject.mark}"
-            subject_label = ttk.Label(subject_frame, text=subject_info, anchor="w")
-            subject_label.grid(row=0, column=0, sticky="w")
-            delete_button = ttk.Button(subject_frame, text="Delete", command=lambda s=subject: self.delete_subject(s))
-            delete_button.grid(row=0, column=1, sticky="e")
-            self.subject_labels.append((subject_label, delete_button))
-
-        # Adjust the height of the subjects frame to maintain the initial height
-        self.subjects_frame.grid_propagate(False)
-        self.subjects_frame.config(height=initial_height)
-
-
+            self.create_subject_frame(idx, subject)
 
     def enroll(self):
-        c = self.student.enrol_subject_ui()
-        if c:
+        # Handle subject enrollment
+        if self.student.enrol_subject_ui():
             self.update_subject_list()
         else:
-            error_message = "Students are allowed to enroll in 4 subjects only"
-            self.show_error(error_message)
+            self.show_error(
+                "Students are allowed to enroll in 4 subjects only")
 
     def logout(self):
         # Handle logout action
         self.clear_content()
         self.navigate("/login")
 
-    def change_password(self):
-        # Handle change password action
-        pass
-
     def clear_content(self):
-        # Clear the content of the window
+        # Clear window content
         for widget in self.frame.winfo_children():
             widget.destroy()
 
@@ -119,14 +102,17 @@ class SubjectEnrollmentWindow:
         self.parent.withdraw()
 
     def show_error(self, message):
-        # Show an error window with the provided message
-        error_window = tk.Toplevel(self.parent)
+        # Display error window with message
+        error_window = ctk.CTkToplevel(self.parent)
         ErrorWindow(error_window, message)
 
+
 def main():
-    root = tk.Tk()
-    app = SubjectEnrollmentWindow(root, lambda route: None)  # Placeholder lambda function for navigate
+    root = ctk.CTk()
+    # Placeholder for navigate and student
+    app = SubjectEnrollmentWindow(root, lambda route: None, student=None)
     root.mainloop()
+
 
 if __name__ == "__main__":
     main()
