@@ -1,7 +1,5 @@
 from .controllers.student_controller import StudentController
 from .controllers.admin_controller import AdminController
-from .views.student_view import StudentView
-from .views.admin_view import AdminView
 from colors.text_colors import *
 from .utils.utils import ErrorMessageHandling
 import os
@@ -15,8 +13,6 @@ STUDENT_SYSTEM = os.getenv('STUDENT_SYSTEM')
 
 class CLISystem:
     def __init__(self):
-        self.student_view = StudentView()
-        self.admin_view = AdminView()
         self.student_controller = StudentController()
         self.admin_controller = AdminController()
 

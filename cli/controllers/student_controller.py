@@ -1,6 +1,5 @@
 from models.student import Student
 from models.database import Database
-from ..views.student_view import StudentView
 from colors.text_colors import *
 import re
 from ..utils.utils import Utils
@@ -19,7 +18,6 @@ STUDENT_NAME_REGISTER = os.getenv('STUDENT_NAME_REGISTER')
 
 class StudentController:
     def __init__(self):
-        self.view = StudentView()
         student_loaded = Database.read_objects_from_file()
         students_objects = [
             Student.convert_to_student_class(student)
@@ -90,7 +88,7 @@ class StudentController:
                 return student
 
         # If not found, display error message
-        self.view.display_error(RED + "Student does not exist" + RESET)
+        print(RED + "Student does not exist" + RESET)
         return None
 
     def check_student_exists_by_email(self, email):

@@ -1,12 +1,10 @@
 from models.database import Database
-from ..views.admin_view import AdminView
 from colors.text_colors import *
 from models.student import Student
 
 
 class AdminController:
     def __init__(self):
-        self.view = AdminView()
         student_loaded = Database.read_objects_from_file()
         students_objects = [
             Student.convert_to_student_class(student)
@@ -75,7 +73,6 @@ class AdminController:
         for student in students:
             if student.ID == student_id_to_remove:
                 students.remove(student)
-                # print(f"{YELLOW}Removing Student {student_id_to_remove} account.{RESET}")
                 Database.write_objects_to_file(students)
                 return
         print(f"{RED}Student {student_id_to_remove} does not exist{RESET}")
@@ -85,6 +82,6 @@ class AdminController:
             RED + "Are you sure you want to clear the database (Y)ES/(N)O: ")
         if student_id_clear == "Y":
             Database.clear_file_data()
-            self.view.display_message(YELLOW + "Students data cleared")
+            print(YELLOW + "Students data cleared")
         else:
             return

@@ -1,5 +1,4 @@
 import customtkinter as ctk
-import logging
 from datetime import datetime
 from .error import ErrorWindow
 from models.database import Database
@@ -64,18 +63,12 @@ class LoginWindow:
         self.parent.deiconify()
 
     def login(self):
-        """Validates login credentials and navigates if successful."""
-        logging.basicConfig(filename='log.txt', level=logging.INFO,
-                            format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-
         if ENVIRONMENT == 'dev' and STUDENT_EMAIL is not None and STUDENT_PASSWORD is not None:
             email = STUDENT_EMAIL
             password = STUDENT_PASSWORD
         else:
             email = self.email_entry.get()
             password = self.password_entry.get()
-
-        logging.info(f'Login attempt made with email: {email}')
 
         isMatchEmailFormat = re.match(Utils.EMAIL_REGEX, email)
         isMatchPasswordFormat = re.match(Utils.PASSWORD_REGEX, password)
@@ -90,7 +83,6 @@ class LoginWindow:
 
         if error_message:
             self.show_error(error_message)
-            logging.info(f'Login attempt unsuccessful: {error_message}')
             return
 
         students = Database.read_objects_from_file()
@@ -103,12 +95,10 @@ class LoginWindow:
             if student.email == email and student.password == password:
                 self.clear_content()
                 self.navigate('/subject-enrollment', student=student)
-                logging.info('Login attempt successful')
                 return
 
         error_message = "Incorrect email or password"
         self.show_error(error_message)
-        logging.info(f'Login attempt unsuccessful: {error_message}')
 
     def exit(self):
         """Closes the application."""
