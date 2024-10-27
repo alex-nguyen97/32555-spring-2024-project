@@ -1,12 +1,11 @@
 from models.database import Database
-from ..views.admin_view import AdminView
 from colors.text_colors import *
 from models.student import Student
 from tabulate import tabulate
 
+
 class AdminController:
     def __init__(self):
-        self.view = AdminView()
         student_loaded = Database.read_objects_from_file()
         students_objects = [
             Student.convert_to_student_class(student)
