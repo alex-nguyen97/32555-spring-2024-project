@@ -1,24 +1,23 @@
 from models.database import Database
-from ..views.admin_view import AdminView
 from colors.text_colors import *
 from models.student import Student
 from tabulate import tabulate
 
+
 class AdminController:
     def __init__(self):
-        self.view = AdminView()
         student_loaded = Database.read_objects_from_file()
         students_objects = [
-            Student(student["name"],
-                    student["email"],
-                    student["password"],
-                    student["ID"],
-                    student["subjects"],
-                    student["mark"],
-                    student["grade"])
+            Student.convert_to_student_class(student)
             for student in student_loaded
         ]
         self.student_list = students_objects
+
+    def print_student_details(self, students):
+        table_data = [[student.name, student.ID, student.email,
+                       student.mark] for student in students]
+        headers = ["Name", "ID", "Email", "Mark"]
+        print(tabulate(table_data, headers, tablefmt="fancy_grid"))
 
     def show_students_list(self):
         print(YELLOW + "Student List" + RESET)
@@ -26,10 +25,8 @@ class AdminController:
         if not students:
             print("< Nothing to Display >")
             return
-        
-        table_data = [[student.name, student.ID, student.email, student.mark] for student in students]
-        headers = ["Name", "ID", "Email", "Mark"]
-        print(tabulate(table_data, headers, tablefmt="fancy_grid"))
+        else:
+            self.print_student_details(students)
 
     def group_students_by_grade(self):
         print(YELLOW + "Grade Grouping" + RESET)
@@ -44,9 +41,7 @@ class AdminController:
 
         for grade, students in grade_groups.items():
             print(f"\n{CYAN}Grade: {grade}{RESET}")
-            table_data = [[student.name, student.ID, student.email, student.mark] for student in students]
-            headers = ["Name", "ID", "Email", "Mark"]
-            print(tabulate(table_data, headers, tablefmt="fancy_grid"))
+            self.print_student_details(students)
 
     def partition_students_by_pass_fail(self):
         students = self.student_list
@@ -59,8 +54,10 @@ class AdminController:
             else:
                 fail_students.append(student)
 
-        pass_table = [[student.name, student.ID, student.email, student.mark] for student in pass_students]
-        fail_table = [[student.name, student.ID, student.email, student.mark] for student in fail_students]
+        pass_table = [[student.name, student.ID, student.email,
+                       student.mark] for student in pass_students]
+        fail_table = [[student.name, student.ID, student.email,
+                       student.mark] for student in fail_students]
         headers = ["Name", "ID", "Email", "Mark"]
 
         print(f"\n{GREEN}[PASS] Students{RESET}")
@@ -79,27 +76,31 @@ class AdminController:
         student_id_to_remove = input("Enter Student ID to Remove: ")
         students = self.student_list
         student_found = False
-        
+
         for student in students:
             if student.ID == student_id_to_remove:
                 # Confirm deletion
                 confirmation = input(f"Are you sure you want to remove student {student.name} (ID: {student.ID})? (Y)ES/(N)O: ").lower()
                 if confirmation == 'y':
                     students.remove(student)
-                    Database.write_objects_to_file([student.to_dict() for student in students])
-                    print(GREEN + f"Student {student_id_to_remove} removed successfully." + RESET)
+                    Database.write_objects_to_file(
+                        [student.to_dict() for student in students])
+                    print(
+                        GREEN + f"Student {student_id_to_remove} removed successfully." + RESET)
                 else:
                     print(YELLOW + "Student removal canceled." + RESET)
                 student_found = True
                 break
-        
+
         if not student_found:
-            print(RED + f"Student with ID {student_id_to_remove} does not exist." + RESET)
+            print(
+                RED + f"Student with ID {student_id_to_remove} does not exist." + RESET)
 
     def clear_database(self):
-        confirmation = input(RED + "Are you sure you want to clear the database? (Y)ES/(N)O: ").lower()
+        confirmation = input(
+            RED + "Are you sure you want to clear the database? (Y)ES/(N)O: ").lower()
         if confirmation == "y":
             Database.clear_file_data()
-            self.view.display_message(YELLOW + "Students data cleared." + RESET)
+            print(YELLOW + "Students data cleared." + RESET)
         else:
             print(YELLOW + "Database clearing canceled." + RESET)
