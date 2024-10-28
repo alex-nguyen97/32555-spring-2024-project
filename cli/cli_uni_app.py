@@ -4,6 +4,8 @@ from colors.text_colors import *
 from .utils.utils import ErrorMessageHandling
 import os
 from dotenv import load_dotenv
+from models.student import Student
+from models.database import Database
 
 load_dotenv()
 ENVIRONMENT = os.getenv('ENVIRONMENT')
@@ -13,8 +15,13 @@ STUDENT_SYSTEM = os.getenv('STUDENT_SYSTEM')
 
 class CLISystem:
     def __init__(self):
-        self.student_controller = StudentController()
-        self.admin_controller = AdminController()
+        student_loaded = Database.read_objects_from_file()
+        students_objects = [
+            Student.convert_to_student_class(student)
+            for student in student_loaded
+        ]
+        self.student_controller = StudentController(students_objects)
+        self.admin_controller = AdminController(students_objects)
 
     def run(self):
         print(CYAN + "Welcome to the University System" + RESET)

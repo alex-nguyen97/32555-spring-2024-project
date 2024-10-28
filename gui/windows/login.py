@@ -1,5 +1,4 @@
 import customtkinter as ctk
-from datetime import datetime
 from .error import ErrorWindow
 from models.database import Database
 import re

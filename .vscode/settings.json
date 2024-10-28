@@ -1,8 +1,9 @@
 {
-    "[python]": {
-        "editor.formatOnSave": false
-    },
+    // Auto-format on save
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    // Cspell for spell check configuration
     "cSpell.words": [
         "dotenv"
-    ],
+    ]
 }

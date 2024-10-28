@@ -17,12 +17,7 @@ STUDENT_NAME_REGISTER = os.getenv('STUDENT_NAME_REGISTER')
 
 
 class StudentController:
-    def __init__(self):
-        student_loaded = Database.read_objects_from_file()
-        students_objects = [
-            Student.convert_to_student_class(student)
-            for student in student_loaded
-        ]
+    def __init__(self, students_objects):
         self.student_list = students_objects
 
     def register_student(self):

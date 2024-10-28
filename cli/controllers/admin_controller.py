@@ -5,12 +5,7 @@ from tabulate import tabulate
 
 
 class AdminController:
-    def __init__(self):
-        student_loaded = Database.read_objects_from_file()
-        students_objects = [
-            Student.convert_to_student_class(student)
-            for student in student_loaded
-        ]
+    def __init__(self, students_objects):
         self.student_list = students_objects
 
     def print_student_details(self, students):
@@ -79,7 +74,9 @@ class AdminController:
         for student in students:
             if student.ID == student_id_to_remove:
                 # Confirm deletion
+                # fmt: off
                 confirmation = input(f"Are you sure you want to remove student {student.name} (ID: {student.ID})? (Y)ES/(N)O: ").lower()
+                # fmt: on
                 if confirmation == 'y':
                     students.remove(student)
                     Database.write_objects_to_file(
