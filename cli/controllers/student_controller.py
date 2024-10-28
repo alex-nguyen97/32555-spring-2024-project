@@ -116,8 +116,9 @@ class StudentController:
             option = input(CYAN + "Your choice: " + RESET).lower()
 
             if option == "c":
-               if student.change_password()
-                    print (GREEN+ "Password changed successfully." + RESET)
+                student.change_password()
+                # CHANGE MADE: Added success message after password change
+                print(GREEN + "Password changed successfully." + RESET)
             elif option == "e":
                 student.enrol_subject()
             elif option == "r":
