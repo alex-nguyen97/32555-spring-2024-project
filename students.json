@@ -3,7 +3,7 @@
         "ID": "137351",
         "name": "John Doe",
         "email": "john.doe@university.com",
-        "password": "JohnDoe4567",
+        "password": "Johndoe4567",
         "subjects": [
             {
                 "ID": 951,
@@ -43,6 +43,15 @@
         "name": "EmmaGrace789",
         "email": "alice.johnson@university.com",
         "password": "EmmaGrace789",
+        "subjects": [],
+        "mark": 0.0,
+        "grade": "P"
+    },
+    {
+        "ID": "961151",
+        "name": "Karishma Kumar",
+        "email": "karishma.kumar@university.com",
+        "password": "JohnDoe1234",
         "subjects": [],
         "mark": 0.0,
         "grade": "P"

@@ -76,7 +76,6 @@ class AdminController:
         student_id_to_remove = input("Enter Student ID to Remove: ")
         students = self.student_list
         student_found = False
-
         for student in students:
             if student.ID == student_id_to_remove:
                 # Confirm deletion
