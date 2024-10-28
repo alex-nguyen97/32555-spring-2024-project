@@ -40,7 +40,7 @@ class StudentController:
             if not re.match(Utils.EMAIL_REGEX, email) or not re.match(Utils.PASSWORD_REGEX, password):
                 print(RED + "Incorrect email or password format." + RESET)
             else:
-                print(YELLOW + "Email and password formats acceptable." + RESET)
+                print(YELLOW + "Profile successfully created." + RESET)
                 # Check if email exists already
                 student_name = self.check_student_exists_by_email(email)
                 if student_name is not None:
@@ -78,7 +78,7 @@ class StudentController:
             if not re.match(Utils.EMAIL_REGEX, email) or not re.match(Utils.PASSWORD_REGEX, password):
                 print(RED + "Incorrect email or password format." + RESET)
             else:
-                print(YELLOW + "Email and password formats acceptable." + RESET)
+                print(YELLOW + "Successfully Logged In." + RESET)
                 break
 
         for student in self.student_list:
@@ -110,13 +110,14 @@ class StudentController:
                 "(E) Enrol: Enrol in a subject. A student can enrol in a maximum of four (4) subjects.")
             print("(R) Remove: Remove a subject from the enrolment list.")
             print(
-                "(S) Show All Students: Shows the enrolled subjects with their marks and grades.")
+                "(S) Show All Subjects: Shows the enrolled subjects with their marks and grades.")
             print("(X) Exit")
 
             option = input(CYAN + "Your choice: " + RESET).lower()
 
             if option == "c":
-                student.change_password()
+               if student.change_password()
+                    print (GREEN+ "Password changed successfully." + RESET)
             elif option == "e":
                 student.enrol_subject()
             elif option == "r":
