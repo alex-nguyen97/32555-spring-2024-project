@@ -120,7 +120,7 @@ class StudentController:
             elif option == "r":
                 student.drop_subject()
             elif option == "s":
-                student.show_enrolled_subjects(student)
+                student.show_enrolled_subjects()
             elif option == "x":
                 break
             else:
