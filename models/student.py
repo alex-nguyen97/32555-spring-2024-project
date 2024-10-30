@@ -4,6 +4,7 @@ from colors.text_colors import *
 from models.subject import Subject
 from cli.utils.utils import Utils
 import re
+from tabulate import tabulate
 
 
 class Student:
@@ -124,13 +125,14 @@ class Student:
         return self.calculate_average_mark() >= 50
 
     def show_enrolled_subjects(self):
-        if self.subjects:
-            print("Enrolled Subjects:")
-            for subject in self.subjects:
-                print(
-                    f"[ Subject:: {subject.ID} -- mark = {subject.mark} -- grade = {subject.grade} ]")
+        subjects = self.subjects
+        if not subjects:
+            print(RED + "No subjects enrolled." + RESET)
         else:
-            print(YELLOW + "Showing 0 subjects.")
+            table_data = [[subject.ID, subject.mark, subject.grade]
+                          for subject in subjects]
+            headers = ["Subject ID", "Mark", "Grade"]
+            print(tabulate(table_data, headers, tablefmt="fancy_grid"))
 
     def to_dict(self):
         subject_list = []

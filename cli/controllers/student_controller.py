@@ -86,8 +86,6 @@ class StudentController:
 
         print(RED + "Incorrect email or password. Please try again." + RESET)
         return None
-    
-        
 
     def check_student_exists_by_email(self, email):
         # Check if student exists in the database
@@ -115,25 +113,15 @@ class StudentController:
 
             if option == "c":
                 student.change_password()
-                
+
                 print(GREEN + "Password changed successfully." + RESET)
             elif option == "e":
                 student.enrol_subject()
             elif option == "r":
                 student.drop_subject()
             elif option == "s":
-                self.show_enrolled_subjects(student)
+                student.show_enrolled_subjects(student)
             elif option == "x":
                 break
             else:
                 ErrorMessageHandling.printInvalidEntry()
-
-    def show_enrolled_subjects(self, student):
-        
-        subjects = student.subjects
-        if not subjects:
-            print(RED + "No subjects enrolled." + RESET)
-        else:
-            table_data = [[subject.ID, subject.mark, subject.grade] for subject in subjects]
-            headers = ["Subject ID", "Mark", "Grade"]
-            print(tabulate(table_data, headers, tablefmt="fancy_grid"))
