@@ -36,12 +36,12 @@ class StudentController:
             if not re.match(Utils.EMAIL_REGEX, email) or not re.match(Utils.PASSWORD_REGEX, password):
                 print(RED + "Incorrect email or password format." + RESET)
             else:
-                print(YELLOW + "Profile successfully created." + RESET)
                 # Check if email exists already
                 student_name = self.check_student_exists_by_email(email)
                 if student_name is not None:
                     print(f"{RED}Student {student_name} already exists{RESET}")
                 else:
+                    print(YELLOW + "Profile successfully created." + RESET)
                     break
 
         # Collect name

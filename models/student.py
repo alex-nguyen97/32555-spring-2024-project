@@ -83,7 +83,7 @@ class Student:
                     self.grade = "F"
                 Database.update_student(self)
                 return
-        print("Subject not found.")
+        print(RED + "Subject not found." + RESET)
 
     def drop_subject_ui(self, id):
         for subject in self.subjects:
