@@ -164,5 +164,5 @@ class Student:
             student.get("ID"),
             student.get("subjects", []),
             student.get("mark", 0.0),
-            student.get("grade", "P")
+            student.get("grade", "Z")
         )
